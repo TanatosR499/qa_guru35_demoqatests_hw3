@@ -37,13 +37,11 @@ public class StudentFormPage {
     List<SelenideElement> subjectsItems = $$(".subjects-auto-complete__option");
 
     public StudentFormPage setFirstName(String value) {
-        firstNameInput.click();
         firstNameInput.setValue(value);
         return this;
     }
 
     public StudentFormPage setLastName(String value) {
-        lastNameInput.click();
         lastNameInput.setValue(value);
         return this;
     }
@@ -60,7 +58,6 @@ public class StudentFormPage {
 
     public StudentFormPage setGender(String gender) {
         $(By.xpath(format("//input[@value='%s']", gender))).parent().click();
-//        genderWrapper.selectRadio(gender);
         return this;
     }
 
