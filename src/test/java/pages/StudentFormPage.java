@@ -115,53 +115,8 @@ public class StudentFormPage implements Page {
         $("#submit").submit();
     }
 
-    public StudentFormPage checkStudentName(String expectedStudentName) {
-        table.checkValueEquals("Student Name", expectedStudentName);
-        return this;
-    }
-
-    public StudentFormPage checkUserEmail(String expectedUserEmail) {
-        table.checkValueEquals("Student Email", expectedUserEmail);
-        return this;
-    }
-
-    public StudentFormPage checkGender(String expectedGender) {
-        table.checkValueEquals("Gender", expectedGender);
-        return this;
-    }
-
-    public StudentFormPage checkMobile(String expectedMobile) {
-        table.checkValueEquals("Mobile", expectedMobile);
-        return this;
-    }
-
-    public StudentFormPage checkDateOfBirth(String expectedDateOfBirth) {
-        table.checkValueEquals("Date of Birth", expectedDateOfBirth);
-        return this;
-    }
-
-    public StudentFormPage checkSubjects(String expectedSubjects) {
-        table.checkValueEquals("Subjects", expectedSubjects);
-        return this;
-    }
-
-    public StudentFormPage checkHobbies(String expectedHobbies) {
-        table.checkValueEquals("Hobbies", expectedHobbies);
-        return this;
-    }
-
-    public StudentFormPage checkPicture(String expectedPicture) {
-        table.checkValueEquals("Picture", expectedPicture);
-        return this;
-    }
-
-    public StudentFormPage checkAddress(String expectedAddress) {
-        table.checkValueEquals("Address", expectedAddress);
-        return this;
-    }
-
-    public StudentFormPage checkStateCity(String expectedStateCity) {
-        table.checkValueEquals("State and City", expectedStateCity);
+    public StudentFormPage checkTableValue(String label, String expected){
+        table.checkValueEquals(label, expected);
         return this;
     }
 

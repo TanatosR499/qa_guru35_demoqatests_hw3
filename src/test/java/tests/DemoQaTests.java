@@ -28,16 +28,15 @@ public class DemoQaTests extends BaseTest {
                 .confirmApplication();
 
         //check result table
-        page.checkStudentName("Tatyana Chigorina")
-                .checkUserEmail("tatiana.thegirloftatius@gmail.com")
-                .checkGender("Female")
-                .checkMobile("9182773477")
-                .checkDateOfBirth("13 July,1996")
-                .checkSubjects("Physics")
-                .checkHobbies("Sports")
-                .checkPicture("garden.png")
-                .checkAddress("Пермь, ул. Сочинская д6, кв.83")
-                .checkStateCity("NCR Delhi")
+        page.checkTableValue("Student Name", "Tatyana Chigorina")
+                .checkTableValue("Student Email","tatiana.thegirloftatius@gmail.com")
+                .checkTableValue("Gender","Female")
+                .checkTableValue("Mobile","9182773477")
+                .checkTableValue("Subjects","Physics")
+                .checkTableValue("Hobbies","Sports")
+                .checkTableValue("Picture","garden.png")
+                .checkTableValue("Address","Пермь, ул. Сочинская д6, кв.83")
+                .checkTableValue("State and City","NCR Delhi")
         ;
     }
 
@@ -57,10 +56,10 @@ public class DemoQaTests extends BaseTest {
         page.checkRequiredGenderLabelHasColor("rgba(40, 167, 69, 1)");
         page.confirmApplication();
 
-        page.checkStudentName("Tatyana Chigorina")
-                .checkUserEmail("tatiana.thegirloftatius@gmail.com")
-                .checkGender("Female")
-                .checkMobile("9182773477");
+        page.checkTableValue("Student Name", "Tatyana Chigorina")
+                .checkTableValue("Student Email","tatiana.thegirloftatius@gmail.com")
+                .checkTableValue("Gender","Female")
+                .checkTableValue("Mobile","9182773477");
     }
 
     @Test
