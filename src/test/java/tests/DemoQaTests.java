@@ -12,13 +12,13 @@ public class DemoQaTests extends BaseTest {
     @Test
     void fillFormSuccessTest() {
         open(StudentFormPage.studentPageRelativeUrl);
-        removeAdvertisement();
+        page.removeAdvertisement();
         page.setFirstName("Tatyana")
                 .setLastName("Chigorina")
                 .setUserEmail("tatiana.thegirloftatius@gmail.com")
                 .setUserNumber("9182773477")
                 .setGender("Female")
-                .chooseDateOfBirth("13","July","1996")
+                .chooseDateOfBirth("13", "July", "1996")
                 .chooseSubjectByLetters("Phy")
                 .chooseHobbies("Sports")
                 .uploadFile("garden.png")
@@ -28,16 +28,23 @@ public class DemoQaTests extends BaseTest {
                 .confirmApplication();
 
         //check result table
-        page.checksResultTable("Tatyana Chigorina", "tatiana.thegirloftatius@gmail.com",
-                "Female","9182773477","13 July,1996",
-                "Physics","Sports","garden.png",
-                "Пермь, ул. Сочинская д6, кв.83", "NCR Delhi");
+        page.checkStudentName("Tatyana Chigorina")
+                .checkUserEmail("tatiana.thegirloftatius@gmail.com")
+                .checkGender("Female")
+                .checkMobile("9182773477")
+                .checkDateOfBirth("13 July,1996")
+                .checkSubjects("Physics")
+                .checkHobbies("Sports")
+                .checkPicture("garden.png")
+                .checkAddress("Пермь, ул. Сочинская д6, кв.83")
+                .checkStateCity("NCR Delhi")
+        ;
     }
 
     @Test
-    void fillOnlyRequiredFieldsTest(){
+    void fillOnlyRequiredFieldsTest() {
         open(StudentFormPage.studentPageRelativeUrl);
-        removeAdvertisement();
+        page.removeAdvertisement();
         page.confirmApplication();
         page.checkRequiredInputsHasColor("rgb(220, 53, 69)");
         page.checkRequiredGenderLabelHasColor("rgba(220, 53, 69, 1)");
@@ -49,22 +56,23 @@ public class DemoQaTests extends BaseTest {
         page.checkRequiredInputsHasColor("rgb(40, 167, 69)");
         page.checkRequiredGenderLabelHasColor("rgba(40, 167, 69, 1)");
         page.confirmApplication();
-        page.checksResultTable("Tatyana Chigorina", "tatiana.thegirloftatius@gmail.com",
-                "Female","9182773477",null,
-                null,null,null,null,
-                null);
+
+        page.checkStudentName("Tatyana Chigorina")
+                .checkUserEmail("tatiana.thegirloftatius@gmail.com")
+                .checkGender("Female")
+                .checkMobile("9182773477");
     }
 
     @Test
-    void checkMobileValidationTest(){
+    void checkMobileValidationTest() {
         open(StudentFormPage.studentPageRelativeUrl);
-        removeAdvertisement();
+        page.removeAdvertisement();
         page.setFirstName("Tatyana")
                 .setLastName("Chigorina")
                 .setUserEmail("tatiana.thegirloftatius@gmail.com")
                 .setUserNumber("91827f3477")
                 .setGender("Other")
                 .confirmApplication();
-        page.checkRequiredInputHasColor(page.getUserNumberInput(),"rgb(220, 53, 69)");
+        page.checkRequiredInputHasColor(page.getUserNumberInput(), "rgb(220, 53, 69)");
     }
 }

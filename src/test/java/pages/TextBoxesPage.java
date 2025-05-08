@@ -5,7 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
-public class TextBoxesPage {
+public class TextBoxesPage implements Page {
     public static String relativeTextBoxPageUrl = "/text-box";
 
     SelenideElement userName = $("#userName");
@@ -22,26 +22,36 @@ public class TextBoxesPage {
         userName.setValue(value);
         return this;
     }
+
     public TextBoxesPage setUserEmail(String value) {
         userEmail.setValue(value);
         return this;
     }
+
     public TextBoxesPage setCurrentAddress(String value) {
         currentAddress.setValue(value);
         return this;
     }
+
     public TextBoxesPage setPermanentAddress(String value) {
         permanentAddress.setValue(value);
         return this;
     }
-    public void sendData(){
+
+    public void sendData() {
         $("#submit").click();
     }
+
     public void checkOutput(String expectedName, String expectedEmail,
-                            String expectedCurrentAddress, String expectedPermanentAddress){
+                            String expectedCurrentAddress, String expectedPermanentAddress) {
         outputName.shouldHave(text(expectedName));
         outputEmail.shouldHave(text(expectedEmail));
         outputCurrentAddress.shouldHave(text(expectedCurrentAddress));
         outputPermanentAddress.shouldHave(text(expectedPermanentAddress));
+    }
+
+    @Override
+    public void removeAdvertisement() {
+        Page.super.removeAdvertisement();
     }
 }

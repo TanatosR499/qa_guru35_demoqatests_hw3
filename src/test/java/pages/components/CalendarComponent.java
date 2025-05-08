@@ -1,12 +1,11 @@
 package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
-import static java.lang.String.format;
 
-public class Calendar {
+public class CalendarComponent {
     SelenideElement monthSelector = $(".react-datepicker__month-select");
     SelenideElement yearSelector = $(".react-datepicker__year-select");
 
@@ -19,6 +18,6 @@ public class Calendar {
     }
 
     public void chooseNumber(String num) {
-        $(By.xpath(format("//div[text()='%s']", num))).click();
+        $(byTagAndText("div", num)).click();
     }
 }

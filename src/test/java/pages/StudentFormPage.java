@@ -2,21 +2,23 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import pages.components.Calendar;
-import pages.components.Table;
+import pages.components.CalendarComponent;
+import pages.components.TableComponent;
 
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static java.lang.String.format;
 
-public class StudentFormPage {
+public class StudentFormPage implements Page {
     public static String studentPageRelativeUrl = "/automation-practice-form";
 
-    Calendar calendar = new Calendar();
+    CalendarComponent calendar = new CalendarComponent();
+    TableComponent table = new TableComponent();
 
     SelenideElement firstNameInput = $("#firstName");
     SelenideElement lastNameInput = $("#lastName");
@@ -35,6 +37,7 @@ public class StudentFormPage {
     SelenideElement cityInput = $("#city");
     SelenideElement genderWrapper = $("#genterWrapper");
     List<SelenideElement> subjectsItems = $$(".subjects-auto-complete__option");
+
 
     public StudentFormPage setFirstName(String value) {
         firstNameInput.setValue(value);
@@ -62,7 +65,7 @@ public class StudentFormPage {
     }
 
     public StudentFormPage chooseSubject(String subject) {
-        $(By.xpath(format("//div[text()='%s']", subject))).click();
+        $(byTagAndText("div", subject)).click();
         return this;
     }
 
@@ -83,7 +86,7 @@ public class StudentFormPage {
     }
 
     public StudentFormPage chooseHobbies(String hobby) {
-        $(By.xpath(format("//label[text()='%s']", hobby))).parent().click();
+        $(byTagAndText("label", hobby)).parent().click();
         return this;
     }
 
@@ -99,13 +102,13 @@ public class StudentFormPage {
 
     public StudentFormPage chooseState(String state) {
         stateInput.parent().click();
-        $(By.xpath(format("//div[text()='%s']", state))).click();
+        $(byTagAndText("div", state)).click();
         return this;
     }
 
     public StudentFormPage chooseCity(String city) {
         cityInput.parent().click();
-        $(By.xpath(format("//div[text()='%s']", city))).click();
+        $(byTagAndText("div", city)).click();
         return this;
     }
 
@@ -113,35 +116,54 @@ public class StudentFormPage {
         $("#submit").submit();
     }
 
-    public void checksResultTable(String expectedStudentName, String expectedUserEmail, String expectedGender,
-                                  String expectedMobile, String expectedDateOfBirth, String expectedSubjects,
-                                  String expectedHobby, String expectedFileName, String expectedAdress, String expectedStateCity) {
-        Table table = new Table();
-        table.getValueByLabel("Student Name").shouldHave(text(expectedStudentName));
-        table.getValueByLabel("Gender").shouldHave(text(expectedGender));
-        table.getValueByLabel("Mobile").shouldHave(text(expectedMobile));
+    public StudentFormPage checkStudentName(String expectedStudentName) {
+        table.checkValueEquals("Student Name", expectedStudentName);
+        return this;
+    }
 
-        if (expectedUserEmail != null) {
-            table.getValueByLabel("Student Email").shouldHave(text(expectedUserEmail));
-        }
-        if (expectedDateOfBirth != null) {
-            table.getValueByLabel("Date of Birth").shouldHave(text(expectedDateOfBirth));
-        }
-        if (expectedSubjects != null) {
-            table.getValueByLabel("Subjects").shouldHave(text(expectedSubjects));
-        }
-        if (expectedHobby != null) {
-            table.getValueByLabel("Hobbies").shouldHave(text(expectedHobby));
-        }
-        if (expectedAdress != null) {
-            table.getValueByLabel("Address").shouldHave(text(expectedAdress));
-        }
-        if (expectedStateCity != null) {
-            table.getValueByLabel("State and City").shouldHave(text(expectedStateCity));
-        }
-        if (expectedFileName != null) {
-            table.getValueByLabel("Picture").shouldHave(text(expectedFileName));
-        }
+    public StudentFormPage checkUserEmail(String expectedUserEmail) {
+        table.checkValueEquals("Student Email", expectedUserEmail);
+        return this;
+    }
+
+    public StudentFormPage checkGender(String expectedGender) {
+        table.checkValueEquals("Gender", expectedGender);
+        return this;
+    }
+
+    public StudentFormPage checkMobile(String expectedMobile) {
+        table.checkValueEquals("Mobile", expectedMobile);
+        return this;
+    }
+
+    public StudentFormPage checkDateOfBirth(String expectedDateOfBirth) {
+        table.checkValueEquals("Date of Birth", expectedDateOfBirth);
+        return this;
+    }
+
+    public StudentFormPage checkSubjects(String expectedSubjects) {
+        table.checkValueEquals("Subjects", expectedSubjects);
+        return this;
+    }
+
+    public StudentFormPage checkHobbies(String expectedHobbies) {
+        table.checkValueEquals("Hobbies", expectedHobbies);
+        return this;
+    }
+
+    public StudentFormPage checkPicture(String expectedPicture) {
+        table.checkValueEquals("Picture", expectedPicture);
+        return this;
+    }
+
+    public StudentFormPage checkAddress(String expectedAddress) {
+        table.checkValueEquals("Address", expectedAddress);
+        return this;
+    }
+
+    public StudentFormPage checkStateCity(String expectedStateCity) {
+        table.checkValueEquals("State and City", expectedStateCity);
+        return this;
     }
 
     public void checkRequiredInputHasColor(SelenideElement input, String color) {
@@ -161,4 +183,8 @@ public class StudentFormPage {
                 .forEach(el -> el.shouldHave(cssValue("color", rgbColor)));
     }
 
+    @Override
+    public void removeAdvertisement() {
+        Page.super.removeAdvertisement();
+    }
 }
