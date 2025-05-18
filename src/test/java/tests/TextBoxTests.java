@@ -2,16 +2,18 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 import pages.TextBoxesPage;
+import utils.JsUtils;
 
 import static com.codeborne.selenide.Selenide.open;
 
 public class TextBoxTests extends BaseTest {
     TextBoxesPage page = new TextBoxesPage();
+    JsUtils jsUtils = new JsUtils();
 
     @Test
     void fillTextBoxesOkTest() {
         open(TextBoxesPage.relativeTextBoxPageUrl);
-        page.removeAdvertisement();
+        jsUtils.removeAdvertisement();
         page.setUserName("Tatyana")
                 .setUserEmail("tatiana.thegirloftatius@gmail.com")
                 .setCurrentAddress("Пермь, ул. Сочинская д6, кв.83")
