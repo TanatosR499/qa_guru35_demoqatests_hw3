@@ -49,9 +49,4 @@ public class TextBoxesPage implements Page {
         outputCurrentAddress.shouldHave(text(expectedCurrentAddress));
         outputPermanentAddress.shouldHave(text(expectedPermanentAddress));
     }
-
-    @Override
-    public void removeAdvertisement() {
-        Page.super.removeAdvertisement();
-    }
 }

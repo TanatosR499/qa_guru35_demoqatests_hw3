@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.StudentFormPage;
 import utils.DateUtils;
+import utils.JsUtils;
 import utils.RandomValues;
 
 import java.util.Date;
@@ -29,6 +30,7 @@ public class DemoQaTests extends BaseTest {
     StudentFormPage page = new StudentFormPage();
     RandomValues randomValues = new RandomValues();
     DateUtils dateUtils = new DateUtils();
+    JsUtils jsUtils = new JsUtils();
 
     @BeforeEach
     void initTestData() {
@@ -52,7 +54,7 @@ public class DemoQaTests extends BaseTest {
     @Test
     void fillFormSuccessTest() {
         open(StudentFormPage.studentPageRelativeUrl);
-        page.removeAdvertisement();
+        jsUtils.removeAdvertisement();
         page.setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
@@ -84,7 +86,7 @@ public class DemoQaTests extends BaseTest {
     @Test
     void fillOnlyRequiredFieldsTest() {
         open(StudentFormPage.studentPageRelativeUrl);
-        page.removeAdvertisement();
+        jsUtils.removeAdvertisement();
         page.confirmApplication();
         page.checkRequiredInputsHasColor("rgb(220, 53, 69)");
         page.checkRequiredGenderLabelHasColor("rgba(220, 53, 69, 1)");
@@ -106,7 +108,7 @@ public class DemoQaTests extends BaseTest {
     @Test
     void checkMobileValidationTest() {
         open(StudentFormPage.studentPageRelativeUrl);
-        page.removeAdvertisement();
+        jsUtils.removeAdvertisement();
         page.setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
