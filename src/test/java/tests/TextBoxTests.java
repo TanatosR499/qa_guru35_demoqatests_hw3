@@ -8,7 +8,6 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class TextBoxTests extends BaseTest {
     TextBoxesPage page = new TextBoxesPage();
-    JsUtils jsUtils = new JsUtils();
 
     @Test
     void fillTextBoxesOkTest() {
