@@ -30,7 +30,6 @@ public class DemoQaTests extends BaseTest {
     StudentFormPage page = new StudentFormPage();
     RandomValues randomValues = new RandomValues();
     DateUtils dateUtils = new DateUtils();
-    JsUtils jsUtils = new JsUtils();
 
     @BeforeEach
     void initTestData() {
@@ -54,7 +53,7 @@ public class DemoQaTests extends BaseTest {
     @Test
     void fillFormSuccessTest() {
         open(StudentFormPage.studentPageRelativeUrl);
-        jsUtils.removeAdvertisement();
+        JsUtils.removeAdvertisement();
         page.setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
@@ -86,7 +85,7 @@ public class DemoQaTests extends BaseTest {
     @Test
     void fillOnlyRequiredFieldsTest() {
         open(StudentFormPage.studentPageRelativeUrl);
-        jsUtils.removeAdvertisement();
+        JsUtils.removeAdvertisement();
         page.confirmApplication();
         page.checkRequiredInputsHasColor("rgb(220, 53, 69)");
         page.checkRequiredGenderLabelHasColor("rgba(220, 53, 69, 1)");
@@ -108,7 +107,7 @@ public class DemoQaTests extends BaseTest {
     @Test
     void checkMobileValidationTest() {
         open(StudentFormPage.studentPageRelativeUrl);
-        jsUtils.removeAdvertisement();
+        JsUtils.removeAdvertisement();
         page.setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(userEmail)

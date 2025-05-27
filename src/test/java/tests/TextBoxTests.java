@@ -13,7 +13,7 @@ public class TextBoxTests extends BaseTest {
     @Test
     void fillTextBoxesOkTest() {
         open(TextBoxesPage.relativeTextBoxPageUrl);
-        jsUtils.removeAdvertisement();
+        JsUtils.removeAdvertisement();
         page.setUserName("Tatyana")
                 .setUserEmail("tatiana.thegirloftatius@gmail.com")
                 .setCurrentAddress("Пермь, ул. Сочинская д6, кв.83")

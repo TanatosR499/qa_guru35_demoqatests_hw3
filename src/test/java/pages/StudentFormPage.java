@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class StudentFormPage implements Page {
+public class StudentFormPage {
     public static String studentPageRelativeUrl = "/automation-practice-form";
 
     CalendarComponent calendar = new CalendarComponent();
