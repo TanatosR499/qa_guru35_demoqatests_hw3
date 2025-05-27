@@ -5,7 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
-public class TextBoxesPage implements Page {
+public class TextBoxesPage {
     public static String relativeTextBoxPageUrl = "/text-box";
 
     SelenideElement userName = $("#userName");
@@ -48,10 +48,5 @@ public class TextBoxesPage implements Page {
         outputEmail.shouldHave(text(expectedEmail));
         outputCurrentAddress.shouldHave(text(expectedCurrentAddress));
         outputPermanentAddress.shouldHave(text(expectedPermanentAddress));
-    }
-
-    @Override
-    public void removeAdvertisement() {
-        Page.super.removeAdvertisement();
     }
 }
