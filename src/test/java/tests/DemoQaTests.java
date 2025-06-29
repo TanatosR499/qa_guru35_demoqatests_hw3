@@ -1,6 +1,7 @@
 package tests;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.StudentFormPage;
 import utils.DateUtils;
@@ -10,7 +11,9 @@ import utils.RandomValues;
 import java.util.Date;
 
 import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
 
+@Tag("demoqa")
 public class DemoQaTests extends BaseTest {
     String firstName;
     String lastName;
@@ -52,9 +55,9 @@ public class DemoQaTests extends BaseTest {
 
     @Test
     void fillFormSuccessTest() {
-        open(StudentFormPage.studentPageRelativeUrl);
-        JsUtils.removeAdvertisement();
-        page.setFirstName(firstName)
+        step("Открываем страницу формы", () -> open(StudentFormPage.studentPageRelativeUrl));
+        step("Выполним скрипт на отключение рекламы", JsUtils::removeAdvertisement);
+        step("Заполняем форму", () -> page.setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
                 .setUserNumber(mobile)
@@ -66,10 +69,9 @@ public class DemoQaTests extends BaseTest {
                 .setAdress(address)
                 .chooseState(state)
                 .chooseCity(city)
-                .confirmApplication();
+                .confirmApplication());
 
-        //check result table
-        page.checkTableValue("Student Name", firstName + " " + lastName)
+        step("Проверка результатов таблицы", () -> page.checkTableValue("Student Name", firstName + " " + lastName)
                 .checkTableValue("Student Email", userEmail)
                 .checkTableValue("Date of Birth", dayOfBirth + " " + birthMonth + "," + birthYear)
                 .checkTableValue("Gender", gender)
@@ -78,42 +80,48 @@ public class DemoQaTests extends BaseTest {
                 .checkTableValue("Hobbies", hobbies)
                 .checkTableValue("Picture", "garden.png")
                 .checkTableValue("Address", address)
-                .checkTableValue("State and City", state + " " + city)
+                .checkTableValue("State and City", state + " " + city))
         ;
     }
 
     @Test
     void fillOnlyRequiredFieldsTest() {
-        open(StudentFormPage.studentPageRelativeUrl);
-        JsUtils.removeAdvertisement();
-        page.confirmApplication();
-        page.checkRequiredInputsHasColor("rgb(220, 53, 69)");
-        page.checkRequiredGenderLabelHasColor("rgba(220, 53, 69, 1)");
-        page.setFirstName(firstName)
-                .setLastName(lastName)
-                .setUserEmail(userEmail)
-                .setUserNumber(mobile)
-                .setGender(gender);
-        page.checkRequiredInputsHasColor("rgb(40, 167, 69)");
-        page.checkRequiredGenderLabelHasColor("rgba(40, 167, 69, 1)");
-        page.confirmApplication();
+        step("Открываем страницу формы", () -> open(StudentFormPage.studentPageRelativeUrl));
+        step("Выполним скрипт на отключение рекламы", JsUtils::removeAdvertisement);
+        step("Подтверждаем форму", () -> page.confirmApplication());
+        step("Проверка формы - триггер обязательности", () -> {
+            page.checkRequiredInputsHasColor("rgb(220, 53, 69)");
+            page.checkRequiredGenderLabelHasColor("rgba(220, 53, 69, 1)");
+        });
+        step("Заполняем параметры", () ->
+                page.setFirstName(firstName)
+                        .setLastName(lastName)
+                        .setUserEmail(userEmail)
+                        .setUserNumber(mobile)
+                        .setGender(gender));
+        step("Проверка формы - триггер сброшен", () -> {
+            page.checkRequiredInputsHasColor("rgb(40, 167, 69)");
+            page.checkRequiredGenderLabelHasColor("rgba(40, 167, 69, 1)");
+        });
+        step("Подтверждаем форму", () -> page.confirmApplication());
 
-        page.checkTableValue("Student Name", firstName + " " + lastName)
-                .checkTableValue("Student Email", userEmail)
-                .checkTableValue("Gender", gender)
-                .checkTableValue("Mobile", mobile);
+        step("Проверка заполненных результатов таблицы", () ->
+                page.checkTableValue("Student Name", firstName + " " + lastName)
+                        .checkTableValue("Student Email", userEmail)
+                        .checkTableValue("Gender", gender)
+                        .checkTableValue("Mobile", mobile));
     }
 
     @Test
     void checkMobileValidationTest() {
-        open(StudentFormPage.studentPageRelativeUrl);
-        JsUtils.removeAdvertisement();
-        page.setFirstName(firstName)
+        step("Открываем страницу формы", () -> open(StudentFormPage.studentPageRelativeUrl));
+        step("Выполним скрипт на отключение рекламы", JsUtils::removeAdvertisement);
+        step("Заполняем форму", () -> page.setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
                 .setUserNumber(badMobile)
                 .setGender(gender)
-                .confirmApplication();
-        page.checkRequiredInputHasColor(page.getUserNumberInput(), "rgb(220, 53, 69)");
+                .confirmApplication());
+        step("Проверка", () -> page.checkRequiredInputHasColor(page.getUserNumberInput(), "rgb(220, 53, 69)"));
     }
 }
