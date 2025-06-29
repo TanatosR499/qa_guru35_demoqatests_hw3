@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 import pages.components.CalendarComponent;
 import pages.components.TableComponent;
 
@@ -9,11 +8,11 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Selectors.byTagAndText;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static java.lang.String.format;
 
-public class StudentFormPage implements Page {
+public class StudentFormPage {
     public static String studentPageRelativeUrl = "/automation-practice-form";
 
     CalendarComponent calendar = new CalendarComponent();
@@ -59,7 +58,7 @@ public class StudentFormPage implements Page {
     }
 
     public StudentFormPage setGender(String gender) {
-        $(By.xpath(format("//input[@value='%s']", gender))).parent().click();
+        genderWrapper.$(byText(gender)).click();
         return this;
     }
 
@@ -135,10 +134,5 @@ public class StudentFormPage implements Page {
                 .asFixedIterable()
                 .stream()
                 .forEach(el -> el.shouldHave(cssValue("color", rgbColor)));
-    }
-
-    @Override
-    public void removeAdvertisement() {
-        Page.super.removeAdvertisement();
     }
 }

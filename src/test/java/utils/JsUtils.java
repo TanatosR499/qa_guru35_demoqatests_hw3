@@ -1,9 +1,9 @@
-package pages;
+package utils;
 
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
-public interface Page {
-    default void removeAdvertisement(){
+public class JsUtils {
+    public static void removeAdvertisement(){
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
     }
