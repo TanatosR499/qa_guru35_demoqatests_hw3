@@ -99,6 +99,7 @@ public class StudentFormPage {
     }
 
     public StudentFormPage chooseState(String state) {
+        stateInput.scrollTo();
         stateInput.parent().click();
         $(byTagAndText("div", state)).click();
         return this;

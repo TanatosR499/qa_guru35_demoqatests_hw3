@@ -15,7 +15,8 @@ public class DateUtils {
 
     public String getDayFromDate(Date date) {
         String dt = getDateInString(date, dottedLocaleDatePattern);
-        return dt.substring(0, 2);
+        String day = dt.substring(0, 2);
+        return day.startsWith("0") ? day.replace("0","") : day;
     }
 
     public Integer getMonthValueFromDate(Date date) {
