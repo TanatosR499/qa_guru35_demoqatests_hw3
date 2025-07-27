@@ -22,7 +22,7 @@ public class BaseTest {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = System.getProperty("browser_size","1920x1080");;
         Configuration.timeout = 10000;
-        Configuration.remote = "https://user1:1234@" + selenoidHost + "/wd/hub";
+        Configuration.remote = "https://" + System.getProperty("selenoid_auth") + "@" + selenoidHost + "/wd/hub";
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
