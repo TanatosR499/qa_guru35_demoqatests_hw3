@@ -1,11 +1,12 @@
 package tests;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.TextBoxesPage;
 import utils.JsUtils;
 
 import static com.codeborne.selenide.Selenide.open;
-
+@Tag("textbox")
 public class TextBoxTests extends BaseTest {
     TextBoxesPage page = new TextBoxesPage();
 

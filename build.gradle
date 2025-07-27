@@ -39,6 +39,7 @@ test {
 }
 
 tasks.withType(Test).configureEach {
+    systemProperties(System.getProperties())
     useJUnitPlatform()
     testLogging {
         lifecycle {
@@ -51,5 +52,15 @@ tasks.withType(Test).configureEach {
 tasks.register('demoqa_test', Test) {
     useJUnitPlatform {
         includeTags("demoqa")
+    }
+}
+tasks.register('smoke_test', Test) {
+    useJUnitPlatform {
+        includeTags("smoke")
+    }
+}
+tasks.register('textbox_test', Test) {
+    useJUnitPlatform {
+        includeTags("textbox")
     }
 }

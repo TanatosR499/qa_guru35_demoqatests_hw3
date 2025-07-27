@@ -2,6 +2,7 @@ package tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import pages.StudentFormPage;
 import utils.DateUtils;
@@ -13,7 +14,7 @@ import java.util.Date;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-@Tag("demoqa")
+@Tags({@Tag("demoqa"),@Tag("smoke")})
 public class DemoQaTests extends BaseTest {
     String firstName;
     String lastName;
