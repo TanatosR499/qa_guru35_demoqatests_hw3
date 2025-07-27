@@ -17,10 +17,10 @@ public class BaseTest {
     @BeforeAll
     static void setUp() {
         Configuration.pageLoadStrategy = "eager";
-        Configuration.browser = browserName;
-        Configuration.browserVersion = browserVersion;
+        Configuration.browser = System.getProperty("browser_name","firefox");
+        Configuration.browserVersion = System.getProperty("browser_version","124");
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = browserSize;
+        Configuration.browserSize = System.getProperty("browser_size","1920x1080");;
         Configuration.timeout = 10000;
         Configuration.remote = "https://user1:1234@" + selenoidHost + "/wd/hub";
         DesiredCapabilities capabilities = new DesiredCapabilities();
